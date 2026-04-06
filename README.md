@@ -44,6 +44,7 @@ An intelligent AI agent system built with LangChain and Groq for private and gov
    cp .env.example .env
    # Edit .env with your API keys and configuration
    ```
+   > Note: Never commit `.env` into Git. Keep all real API keys and secrets local.
 
 5. **Run the application**
    ```bash
