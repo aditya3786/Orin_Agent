@@ -1,0 +1,62 @@
+{
+  "total_documents": 6,
+  "documents_by_department": {
+    "HR": 5,
+    "IT": 1
+  },
+  "documents_by_type": {
+    "guide": 2,
+    "policy": 4
+  },
+  "recent_uploads": [
+    {
+      "filename": "leave_policy.txt",
+      "department": "HR",
+      "document_type": "policy",
+      "uploaded_by": "admin@example.com",
+      "uploaded_at": "2026-04-06T08:53:34.638594",
+      "size": 1463
+    },
+    {
+      "filename": "leave_policy.txt",
+      "department": "HR",
+      "document_type": "policy",
+      "uploaded_by": "admin@example.com",
+      "uploaded_at": "2026-04-06T08:37:26.268985",
+      "size": 1463.0
+    },
+    {
+      "filename": "expense_reimbursement_policy.txt",
+      "department": "HR",
+      "document_type": "policy",
+      "uploaded_by": "admin@example.com",
+      "uploaded_at": "2026-04-06T08:36:54.906244",
+      "size": 1750.0
+    },
+    {
+      "filename": "it_support_policy.txt",
+      "department": "IT",
+      "document_type": "policy",
+      "uploaded_by": "admin@example.com",
+      "uploaded_at": "2026-04-06T08:37:09.325512",
+      "size": 1902.0
+    },
+    {
+      "filename": "Unknown",
+      "department": "HR",
+      "document_type": "guide",
+      "uploaded_by": "Unknown",
+      "uploaded_at": "2026-04-06T08:49:35.386949",
+      "size": 0
+    },
+    {
+      "filename": "employee_onboarding_guide.txt",
+      "department": "HR",
+      "document_type": "guide",
+      "uploaded_by": "admin@example.com",
+      "uploaded_at": "2026-04-06T08:36:40.821647",
+      "size": 1883.0
+    }
+  ],
+  "last_updated": "2026-04-06T08:53:51.648441"
+}

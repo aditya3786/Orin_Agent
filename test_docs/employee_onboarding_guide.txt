@@ -1,0 +1,38 @@
+EMPLOYEE ONBOARDING GUIDE
+==========================
+
+Welcome to the organization! This guide will help you get set up in your first week.
+
+DAY 1 - ARRIVAL & SETUP
+  - Report to Reception at 9:00 AM with your offer letter and ID proof.
+  - Collect your ID card, access card, and welcome kit from HR (Room 101).
+  - IT will set up your laptop, email account, and system access by noon.
+  - Your email format: firstname.lastname@orin.gov
+  - Attend the Orientation Session at 2:00 PM in Conference Hall A.
+
+WEEK 1 CHECKLIST
+  [ ] Complete HR documentation (Form 16, bank details, emergency contact)
+  [ ] Set up MFA on your office account (IT will assist)
+  [ ] Read and sign the IT Acceptable Use Policy
+  [ ] Complete mandatory online training modules on the Learning Portal
+  [ ] Meet your assigned buddy/mentor
+  [ ] Attend department introduction with your team lead
+
+IMPORTANT PORTALS & CONTACTS
+  - HR Portal:       https://hr.internal.gov          (Leave, payslips, policies)
+  - IT Portal:       https://it.internal.gov          (Support tickets, equipment)
+  - Finance Portal:  https://finance.internal.gov     (Expense claims, advances)
+  - Learning Portal: https://learn.internal.gov       (Training courses)
+
+  - HR Helpdesk:      hr@orin.gov          | Ext. 1200
+  - IT Helpdesk:      it-support@orin.gov  | Ext. 1100
+  - Finance:          finance@orin.gov     | Ext. 1300
+  - Your HR Partner:  onboarding@orin.gov  | Ext. 1205
+
+BENEFITS OVERVIEW
+  - Health Insurance: Family floater plan (self + spouse + 2 children). Enroll within 30 days of joining.
+  - Provident Fund: 12% of basic salary contributed by employee; matched by employer.
+  - Annual Bonus: Performance-based, paid in Q1 of the following year.
+  - Learning Budget: Rs. 25,000/year for approved courses and certifications.
+
+We're glad to have you on board. Reach out to HR any time — we're here to help!
