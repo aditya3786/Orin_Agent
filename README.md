@@ -1,45 +1,51 @@
 # ORIN AI Agent System
 
-An intelligent AI agent system built with LangChain for private and government offices to instantly resolve queries, reduce staff workload, and streamline coordination processes.
+An intelligent AI agent system built with LangChain and Groq for private and government offices to instantly resolve queries, reduce staff workload, and streamline coordination processes.
 
 ## 🌟 Features
 
-- **RAG (Retrieval-Augmented Generation)**: Uses Pinecone vector database for intelligent document search
+- **Groq-powered AI Chat**: Uses Groq LLM via `langchain-groq` for query generation
+- **RAG (Retrieval-Augmented Generation)**: Uses Pinecone vector database and document search tools
 - **Secure Authentication**: JWT-based authentication with API key support
-- **Personalized Data Access**: Secure integration with internal portals for user-specific information
-- **Multi-Platform Integration**: REST API with API keys for easy platform integration
-- **Chat History Management**: Persistent conversation history for context-aware responses
-- **Document Management**: Upload and index official documents and policies
-- **Department-wise Organization**: Support for multi-department operations
+- **Document Management**: Upload, index, and search official documents and policies
+- **User & Admin Controls**: Admin panel for user management and system statistics
+- **Department-aware Answers**: Supports document metadata by department and type
+- **Safe Answering**: Agent is instructed to answer only from uploaded documents
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - Python 3.11+
-- OpenAI API Key
-- Pinecone Account (for vector database)
+- Groq API Key
+- Pinecone Account
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Meridion-Labs/orin-langchain.git
-   cd orin-langchain
+   git clone https://github.com/aditya3786/Orin_Agent.git
+   cd "Orin_Agent"
    ```
 
-2. **Install dependencies**
+2. **Create and activate a virtual environment**
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Set up environment variables**
+4. **Set up environment variables**
    ```bash
    cp .env.example .env
    # Edit .env with your API keys and configuration
    ```
 
-4. **Run the application**
+5. **Run the application**
    ```bash
    python main.py
    ```
@@ -60,8 +66,6 @@ The API will be available at `http://localhost:8000`
 - **POST** `/auth/login` - User login
 - **POST** `/auth/register` - User registration
 - **GET** `/auth/profile` - Get user profile
-- **POST** `/auth/api-keys` - Create API key
-- **GET** `/auth/api-keys` - List API keys
 
 ### Chat & AI Endpoints
 
@@ -97,15 +101,14 @@ curl -X POST "http://localhost:8000/api/v1/chat" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "message": "What are the office policies for remote work?",
-    "context": {"department": "HR"}
+    "message": "What is the leave policy for HR employees?"
   }'
 
 # Using API key
 curl -X POST "http://localhost:8000/api/v1/chat/api-key?api_key=YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "message": "Show me my attendance record"
+    "message": "Tell me the sick leave rules."
   }'
 ```
 
@@ -113,7 +116,7 @@ curl -X POST "http://localhost:8000/api/v1/chat/api-key?api_key=YOUR_API_KEY" \
 ```bash
 curl -X POST "http://localhost:8000/api/v1/documents/upload" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -F "file=@policy_document.pdf" \
+  -F "files=@leave_policy.txt" \
   -F "department=HR" \
   -F "document_type=policy"
 ```
@@ -121,35 +124,33 @@ curl -X POST "http://localhost:8000/api/v1/documents/upload" \
 ## 🏗️ System Architecture
 
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Client Apps   │────│   FastAPI App   │────│   LangChain     │
-│                 │    │                 │    │   AI Agent     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                       │
-                                │                       │
-                       ┌─────────────────┐    ┌─────────────────┐
-                       │  Authentication │    │   Pinecone      │
-                       │   (JWT/API Key) │    │ Vector Database │
-                       └─────────────────┘    └─────────────────┘
-                                │                       │
-                                │                       │
-                       ┌─────────────────┐    ┌─────────────────┐
-                       │ Internal Portal │    │   OpenAI API    │
-                       │  Integration    │    │                 │
-                       └─────────────────┘    └─────────────────┘
+Client UI / Admin UI
+        │
+        ▼
+    FastAPI Backend
+        │
+        ▼
+    LangChain + Groq LLM
+        │
+        ▼
+    Pinecone Vector Store
 ```
 
 ## 🔧 Configuration
 
 ### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `OPENAI_API_KEY` | OpenAI API key | Required |
-| `PINECONE_API_KEY` | Pinecone API key | Required |
-| `PINECONE_ENVIRONMENT` | Pinecone environment | Required |
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `GROQ_API_KEY` | Groq API key for the model | Yes |
+| `GROQ_MODEL` | Groq model name | Yes |
+| `GOOGLE_API_KEY` | Google API key for embeddings | Optional |
+| `OPENAI_API_KEY` | OpenAI API key | Optional (compatibility) |
+| `OPENAI_MODEL` | OpenAI model name | Optional |
+| `PINECONE_API_KEY` | Pinecone API key | Yes |
+| `PINECONE_ENVIRONMENT` | Pinecone environment | Yes |
 | `PINECONE_INDEX_NAME` | Pinecone index name | `orin-documents` |
-| `SECRET_KEY` | JWT secret key | Required |
+| `SECRET_KEY` | JWT secret key | Yes |
 | `DATABASE_URL` | Database connection string | `sqlite:///./orin.db` |
 | `PORTAL_BASE_URL` | Internal portal URL | Optional |
 | `PORTAL_API_KEY` | Internal portal API key | Optional |
@@ -157,67 +158,48 @@ curl -X POST "http://localhost:8000/api/v1/documents/upload" \
 ## 🎯 Use Cases
 
 ### Government Offices
-- **Citizen Query Resolution**: Instant answers about government services and procedures
-- **Internal Staff Support**: Quick access to policies, regulations, and procedures
-- **Document Management**: Centralized search across all government documents
+- Instant answers for policy, leave, and procedure queries
+- Document-backed responses for internal and citizen services
+- Centralized knowledge access for departments
 
 ### Private Organizations
-- **Employee Self-Service**: HR policies, leave policies, and company information
-- **Customer Support**: Automated first-level support with document-backed responses
-- **Training and Onboarding**: Interactive assistance for new employees
+- Employee self-service for HR and IT policies
+- Automated support using uploaded documents
+- Better coordination across departments
 
 ### Educational Institutions
-- **Student Information System**: Access to grades, attendance, and academic records
-- **Administrative Support**: Quick answers about academic policies and procedures
-- **Faculty Assistance**: Research document search and administrative queries
+- Student policy and administrative query support
+- Document search for academic guidelines
+- Faculty and staff assistance with internal processes
 
 ## 🧪 Testing
 
-Run the test suite:
+Run the tests:
 ```bash
 pytest tests/
 ```
 
 ## 🚀 Deployment
 
-### Production Setup
-
-1. **Environment Configuration**
-   - Use strong JWT secret keys
-   - Configure proper CORS settings
-   - Set up SSL certificates
-
-2. **Database**
-   - Use PostgreSQL for production
-   - Set up proper database migrations
-
-3. **Vector Database**
-   - Configure Pinecone with appropriate indexes
-   - Set up proper backup and recovery
-
-4. **Monitoring**
-   - Add application monitoring
-   - Set up logging and alerting
+1. Use production-ready secrets and HTTPS
+2. Configure a persistent database such as PostgreSQL
+3. Set up Pinecone index and backup strategy
+4. Add app monitoring and logging
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for new functionality
-5. Submit a pull request
+2. Create a new branch
+3. Add your changes and tests
+4. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
 ## 🆘 Support
 
-For support and questions:
-- Create an issue in this repository
-- Contact the development team at support@meridion-labs.com
-
-## 🔮 Roadmap
+For questions or issues, open an issue in this repository.
 
 - [ ] Database integration (PostgreSQL)
 - [ ] Advanced user management
